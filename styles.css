@@ -115,8 +115,9 @@ html {
 #mobile-controls button {
   padding: 15px;
   font-size: 18px;
-  background-color: #4caf50;
-  color: white;
+  font-weight: 600;
+  background-color: #050505e6;
+  color: #4caf50;
   border: none;
   border-radius: 5px;
   cursor: pointer;
