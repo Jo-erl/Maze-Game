@@ -1,0 +1,157 @@
+/*FONTS*/
+@font-face {
+  font-family: "MTNBrighterSans";
+  src: url("ttf/MTNBrighterSans-Regular.ttf") format("truetype");
+  font-weight: 400; /* Regular weight */
+}
+
+@font-face {
+  font-family: "MTNBrighterSans";
+  src: url("ttf/MTNBrighterSans-Medium.ttf") format("truetype");
+  font-weight: 500; /* Medium weight */
+}
+
+@font-face {
+  font-family: "MTNBrighterSans";
+  src: url("ttf/MTNBrighterSans-ExtraBold.ttf") format("truetype");
+  font-weight: 700; /* Extra weight */
+}
+
+@font-face {
+  font-family: "MTNBrighterSans";
+  src: url("ttf/MTNBrighterSans-ExtraLight.ttf") format("truetype");
+  font-weight: 100; /* Extra light */
+}
+/*=======================================================*/
+* {
+  font-family: "MTNBrighterSans", sans-serif;
+}
+/*=======================================================*/
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #e2e2e2;
+}
+/*=======================================================*/
+#game-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/*=======================================================*/
+#start-menu,
+#end-screen {
+  text-align: center;
+  background-color: #050505e6;
+  color: green;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #0000001a;
+}
+/*=======================================================*/
+.author {
+  color: white !important;
+  font-size: 14px;
+  font-weight: 100;
+}
+/*=======================================================*/
+#maze-area {
+  position: relative;
+}
+/*=======================================================*/
+#game-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+/*=======================================================*/
+#timer {
+  text-align: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+/*=======================================================*/
+#pause-button {
+  padding: 5px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: #050505e6;
+  color: #4caf50;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+}
+/*=======================================================*/
+#maze-canvas {
+  border: 5px solid #000;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+/*=======================================================*/
+#mobile-controls {
+  display: none;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-top: 20px;
+}
+/*=======================================================*/
+#mobile-controls button {
+  padding: 15px;
+  font-size: 18px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+/*=======================================================*/
+#up {
+  grid-column: 2 / 3;
+}
+#left {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+#right {
+  grid-column: 3 / 4;
+  grid-row: 2 / 3;
+}
+#down {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+/*=======================================================*/
+#start-button,
+#restart-button {
+  padding: 10px 20px;
+  font-size: 18px;
+  font-weight: 600;
+  background-color: #4caf50;
+  color: #050505e6;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+/*=======================================================*/
+@media (max-width: 768px) {
+  #maze-canvas {
+    width: 100%;
+    height: auto;
+  }
+  /*=======================================================*/
+  #mobile-controls {
+    display: grid;
+  }
+}
+/*=======================================================*/

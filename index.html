@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Get Out! by JoErl</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no shrink-to-fit=no"
+    />
+    <meta name="description" content="Maze Game by JoErl" />
+    <meta name="keywords" content="html, css" />
+    <meta name="author" content="Joel Anang" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="favicon.png" type="image/x-icon" />
+  </head>
+  <body>
+    <!--=======================================================-->
+    <div id="game-container">
+      <div id="start-menu">
+        <h1>Get Out!<br /><span class="author">By Joel Anang</span></h1>
+        <button id="start-button">Start Game</button>
+      </div>
+      <!--=======================================================-->
+      <div id="maze-area" style="display: none">
+        <div id="timer">
+          Game ends in: <span id="time-left"></span>
+          <button id="pause-button">Pause</button>
+        </div>
+        <canvas id="maze-canvas"></canvas>
+      </div>
+      <!--=======================================================-->
+      <div id="mobile-controls" style="display: none">
+        <button id="up">Up</button>
+        <button id="down">Down</button>
+        <button id="left">Left</button>
+        <button id="right">Right</button>
+      </div>
+      <!--=======================================================-->
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
