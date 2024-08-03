@@ -144,6 +144,7 @@ function drawMaze() {
       const y = row * CELL_SIZE;
 
       ctx.strokeStyle = "#FFFFFF";
+      ctx.lineWidth = 2;
       ctx.beginPath();
       if (cell.walls.top) {
         ctx.moveTo(x, y);
@@ -206,6 +207,7 @@ function movePlayer(direction) {
       break;
   }
 
+  // Only update player position if the move is valid
   if (newRow !== player.row || newCol !== player.col) {
     player.row = newRow;
     player.col = newCol;
