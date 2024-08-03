@@ -2,7 +2,6 @@ const gameContainer = document.getElementById("game-container");
 const startMenu = document.getElementById("start-menu");
 const mazeArea = document.getElementById("maze-area");
 const mobileControls = document.getElementById("mobile-controls");
-const startButton = document.getElementById("start-button");
 const pauseButton = document.getElementById("pause-button");
 const canvas = document.getElementById("maze-canvas");
 const ctx = canvas.getContext("2d");
@@ -10,15 +9,44 @@ const timerElement = document.getElementById("time-left");
 
 let maze, player, exit;
 let gameInterval, timerInterval;
-let timeLeft = 5 * 60; // 5 minutes in seconds
+let timeLeft;
 let isPaused = false;
+let CELL_SIZE, ROWS, COLS;
 
-const CELL_SIZE = 20;
-const ROWS = 20;
-const COLS = 20;
+// Difficulty settings
+const difficulties = {
+  easy: { size: 20, time: 5 * 60 },
+  medium: { size: 30, time: 10 * 60 },
+  hard: { size: 40, time: 15 * 60 },
+};
 
-canvas.width = COLS * CELL_SIZE;
-canvas.height = ROWS * CELL_SIZE;
+let currentDifficulty;
+
+// Modify the start menu in HTML
+startMenu.innerHTML = `
+  <h1>Get Out!<br /><span class="author">By Joel Anang</span></h1>
+  <select id="difficulty-select">
+    <option value="easy">Easy</option>
+    <option value="medium">Medium</option>
+    <option value="hard">Hard</option>
+  </select>
+  <button id="start-button">Start Game</button>
+`;
+
+const difficultySelect = document.getElementById("difficulty-select");
+const startButton = document.getElementById("start-button");
+
+function setDifficulty() {
+  currentDifficulty = difficulties[difficultySelect.value];
+  ROWS = COLS = currentDifficulty.size;
+  timeLeft = currentDifficulty.time;
+  CELL_SIZE = Math.min(
+    Math.floor((window.innerWidth - 20) / COLS),
+    Math.floor((window.innerHeight - 100) / ROWS)
+  );
+  canvas.width = COLS * CELL_SIZE;
+  canvas.height = ROWS * CELL_SIZE;
+}
 
 class Cell {
   constructor(row, col) {
@@ -50,6 +78,17 @@ function generateMaze() {
       chosen.visited = true;
       stack.push(chosen);
     }
+  }
+
+  // Generate random patterns
+  for (let i = 0; i < (ROWS * COLS) / 10; i++) {
+    const row = Math.floor(Math.random() * ROWS);
+    const col = Math.floor(Math.random() * COLS);
+    const cell = maze[row][col];
+    const wallToRemove = ["top", "right", "bottom", "left"][
+      Math.floor(Math.random() * 4)
+    ];
+    cell.walls[wallToRemove] = false;
   }
 
   player = { row: 0, col: 0 };
@@ -94,13 +133,17 @@ function removeWall(cell1, cell2) {
 function drawMaze() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+  // Set the background to a dark color
+  ctx.fillStyle = "#050505e6";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+
   for (let row = 0; row < ROWS; row++) {
     for (let col = 0; col < COLS; col++) {
       const cell = maze[row][col];
       const x = col * CELL_SIZE;
       const y = row * CELL_SIZE;
 
-      ctx.strokeStyle = "#000";
+      ctx.strokeStyle = "#FFFFFF";
       ctx.beginPath();
       if (cell.walls.top) {
         ctx.moveTo(x, y);
@@ -194,6 +237,7 @@ function updateTimer() {
 }
 
 function startGame() {
+  setDifficulty();
   startMenu.style.display = "none";
   mazeArea.style.display = "block";
   if (window.innerWidth <= 768) {
@@ -203,7 +247,7 @@ function startGame() {
   generateMaze();
   drawMaze();
 
-  timeLeft = 5 * 60; // Reset to 5 minutes
+  timeLeft = currentDifficulty.time; // Reset the timer
   isPaused = false;
   timerInterval = setInterval(updateTimer, 1000);
 
@@ -270,14 +314,9 @@ document
 
 // Responsive canvas sizing
 window.addEventListener("resize", () => {
-  if (window.innerWidth <= 768) {
-    canvas.width = window.innerWidth - 20;
-    canvas.height = canvas.width;
-    CELL_SIZE = canvas.width / COLS;
-    drawMaze();
-  } else {
-    canvas.width = COLS * CELL_SIZE;
-    canvas.height = ROWS * CELL_SIZE;
-    drawMaze();
-  }
+  setDifficulty(); // Recalculate CELL_SIZE and canvas dimensions
+  drawMaze();
 });
+
+// Initialize the game
+setDifficulty();

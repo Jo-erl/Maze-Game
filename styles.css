@@ -39,7 +39,7 @@ html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: #e2e2e2;
+  background-color: #e9e9e9e6;
 }
 /*=======================================================*/
 #game-container {
@@ -101,8 +101,9 @@ html {
 }
 /*=======================================================*/
 #maze-canvas {
-  border: 5px solid #000;
+  border: none;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 /*=======================================================*/
 #mobile-controls {
@@ -152,14 +153,37 @@ html {
   margin-top: 20px;
 }
 /*=======================================================*/
+#difficulty-select {
+  border: none;
+  border-radius: 10px;
+  padding: 2px 5px;
+}
+/*=======================================================*/
 @media (max-width: 768px) {
+  #maze-area {
+    margin: 15px;
+  }
+  /*=======================================================*/
   #maze-canvas {
-    width: 100%;
-    height: auto;
+    max-width: calc(100% - 30px);
+    max-height: calc(100vh - 200px);
+    margin: 0 auto;
+    margin-left: 8px;
   }
   /*=======================================================*/
   #mobile-controls {
     display: grid;
+    padding: 0 15px;
+    margin-top: -15px;
+  }
+  /*=======================================================*/
+  #timer {
+    flex-direction: column;
+    gap: 5px;
+  }
+  /*=======================================================*/
+  #pause-button {
+    margin-top: 5px;
   }
 }
 /*=======================================================*/
